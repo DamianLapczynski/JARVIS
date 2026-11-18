@@ -1,0 +1,34 @@
+[project]
+name = "jarvis-skeleton"
+version = "0.1.0"
+description = "A minimal, runnable skeleton for building your own voice assistant (JARVIS-style butler)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+# Core has zero runtime dependencies on purpose: `jarvis doctor` works right after `uv sync`.
+dependencies = []
+
+[project.optional-dependencies]
+secrets = ["keyring"]
+brain = ["claude-agent-sdk"]
+voice = ["sounddevice"]
+google = ["google-auth-oauthlib", "google-api-python-client"]
+
+[project.scripts]
+jarvis = "jarvis.cli:main"
+
+# Third-party tool plugins register here: [project.entry-points."jarvis.tools"]
+# my_plugin = "my_package.module"   # module must expose register(registry)
+
+[dependency-groups]
+dev = ["pytest"]
+
+[build-system]
+requires = ["uv_build>=0.8,<1"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "jarvis"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,48 @@
+# Copy to config.toml (`jarvis init`). config.toml is git-ignored.
+# NEVER put secrets here. Secrets go to the OS keyring: `jarvis secrets set <name>`.
+
+[jarvis]
+name = "Jarvis"
+language = "en"          # reply language hint for your brain / persona
+dry_run = true           # true: write tools (W1/W2) only log what they WOULD do
+
+[brain]
+backend = "echo"         # "echo" (built-in stub) | "agent_sdk" (implement in brain/agent_sdk.py)
+model = "YOUR_MODEL_NAME"
+
+[security]
+# The process refuses to start when one of these environment variables is set
+# (protects against silently switching to a paid API). Empty list disables the guard.
+forbidden_env = ["ANTHROPIC_API_KEY"]
+
+[tools]
+plugin_dir = ""          # optional extra directory with plugin .py files, e.g. "./my_plugins"
+disabled = []            # tool names to hide, e.g. ["dice_roll"]
+
+[pc.apps]
+# Allowlist for pc_open_app: name -> URI. Only schemes in SAFE_SCHEMES are accepted.
+notepad = "ms-notepad:"
+calculator = "calculator:"
+
+[speech]
+tts = "console"          # "console" | "piper" | "azure" (stubs: implement in speech/tts.py)
+stt = "stdin"            # "stdin" | "your_engine"
+piper_binary = "piper"
+piper_model = "PATH_TO_PIPER_MODEL.onnx"
+azure_region = "YOUR_AZURE_REGION"
+azure_voice = "YOUR_AZURE_VOICE_NAME"
+
+[telegram]
+enabled = false
+user_id = 0              # your numeric Telegram user id (allowlist: everyone else is ignored)
+# Bot token: `jarvis secrets set telegram`
+
+[dashboard]
+enabled = true
+host = "127.0.0.1"
+port = 4330
+
+[google]
+enabled = false
+# OAuth client JSON: `jarvis secrets set google_client`; implement flow in gapi/google.py
+scopes = ["https://www.googleapis.com/auth/calendar.readonly"]

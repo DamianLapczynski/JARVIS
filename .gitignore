@@ -1,0 +1,42 @@
+# Environments and caches
+.venv/
+.uv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+*.egg-info/
+
+# Local config and secrets: keep only config.example.toml in the repo
+config.toml
+.env
+.env.*
+*.pem
+*.key
+*_key.txt
+credentials.json
+client_secret*.json
+token*.json
+
+# Runtime data: databases, logs, recordings, models, caches
+data/
+*.db
+*.db-journal
+*.sqlite*
+*.log
+*.wav
+*.mp3
+*.ogg
+*.pcm
+*.onnx
+.models/
+tts_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
